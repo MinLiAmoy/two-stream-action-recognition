@@ -1,5 +1,6 @@
 # two-stream-action-recognition
 **This repo is cloned from [two-stream-action-recognition](https://github.com/jeffreyhuang1/two-stream-action-recogniton). The original repo is based on Python 2.X, and I made some modifications to make it support Python 3.6.**
+
 We use a spatial and motion stream cnn with ResNet101 for modeling video information in UCF101 dataset.
 ## Reference Paper
 *  [[1] Two-stream convolutional networks for action recognition in videos](http://papers.nips.cc/paper/5353-two-stream-convolutional)
