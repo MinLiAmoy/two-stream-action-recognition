@@ -53,13 +53,13 @@ We use a spatial and motion stream cnn with ResNet101 for modeling video informa
 ## 4. Testing method
   * For every 3783 testing videos, we uniformly sample 19 frames in each video and the video level prediction is the voting result of all 19 frame level predictions.
   * The reason we choose the number 19 is that the minimun number of video frames in UCF101 is 28 and we have to make sure there are sufficient frames for testing in 10 stack motion stream.
-## 5. Performace
-   
+## 5. Performance
+**The performance I tested is inconsistent with the original post, and I reported the result I got here.**   
  network      | top1  |
 --------------|:-----:|
-Spatial cnn   | 82.1% | 
+Spatial cnn   | 81.3% | 
 Motion cnn    | 79.4% | 
-Average fusion| 88.5% |      
+Average fusion| 88.1% |      
    
 ## 6. Pre-trained Model
 

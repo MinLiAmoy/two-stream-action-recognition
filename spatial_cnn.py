@@ -59,6 +59,8 @@ def main():
     )
     #Training
     if arg.evaluate:
+        cudnn.benchmark = True
+        model.build_model()
         model.resume_and_evaluate()
     else:
         model.run()
