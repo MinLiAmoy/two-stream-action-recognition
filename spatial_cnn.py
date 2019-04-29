@@ -58,7 +58,10 @@ def main():
                         test_video=test_video
     )
     #Training
-    model.run()
+    if arg.evaluate:
+        model.resume_and_evaluate()
+    else:
+        model.run()
 
 class Spatial_CNN():
     def __init__(self, nb_epochs, lr, batch_size, resume, start_epoch, evaluate, train_loader, test_loader, test_video):
@@ -98,6 +101,9 @@ class Spatial_CNN():
         if self.evaluate:
             self.epoch = 0
             prec1, val_loss = self.validate_1epoch()
+            with open('record/spatial/spatial_video_preds.pickle','wb') as f:
+                    pickle.dump(self.dic_video_level_preds,f)
+            f.close()
             return
 
     def run(self):
@@ -148,6 +154,7 @@ class Spatial_CNN():
 
             # compute output
             output = Variable(torch.zeros(len(data_dict['img1']),101).float()).cuda()
+            # ML: 3 frames for each videos. the length above is the batch size, here is a mini-batch of dictionary.
             for i in range(len(data_dict)):
                 key = 'img'+str(i)
                 data = data_dict[key]

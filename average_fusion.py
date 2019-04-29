@@ -19,12 +19,12 @@ if __name__ == '__main__':
 
     dataloader = dataloader.spatial_dataloader(BATCH_SIZE=1, num_workers=1, 
                                     path='/research/dept2/mli/Data/jpegs_256/', 
-                                    ucf_list='./UCF_list/'
+                                    ucf_list='./UCF_list/',
                                     ucf_split='01')
     train_loader,val_loader,test_video = dataloader.run()
 
-    video_level_preds = np.zeros((len(list(rgb.keys())),101))
-    video_level_labels = np.zeros(len(list(rgb.keys())))
+    video_level_preds = np.zeros((len(rgb.keys()),101))
+    video_level_labels = np.zeros(len(rgb.keys()))
     correct=0
     ii=0
     for name in sorted(list(rgb.keys())):   
@@ -44,4 +44,4 @@ if __name__ == '__main__':
         
     top1,top5 = accuracy(video_level_preds, video_level_labels, topk=(1,5))     
                                 
-    print top1,top5
+    print (top1,top5)

@@ -21,7 +21,7 @@ from network import *
 import dataloader
 
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 parser = argparse.ArgumentParser(description='UCF101 motion stream on resnet101')
 parser.add_argument('--epochs', default=500, type=int, metavar='N', help='number of total epochs')
@@ -64,7 +64,10 @@ def main():
                         test_video=test_video
                         )
     #Training
-    model.run()
+    if arg.evaluate:
+        model.resume_and_evaluate()
+    else:
+        model.run()
 
 class Motion_CNN():
     def __init__(self, nb_epochs, lr, batch_size, resume, start_epoch, evaluate, train_loader, test_loader, channel,test_video):
@@ -106,6 +109,9 @@ class Motion_CNN():
         if self.evaluate:
             self.epoch=0
             prec1, val_loss = self.validate_1epoch()
+            with open('record/motion/motion_video_preds.pickle','wb') as f:
+                    pickle.dump(self.dic_video_level_preds,f)
+            f.close() 
             return
     
     def run(self):
